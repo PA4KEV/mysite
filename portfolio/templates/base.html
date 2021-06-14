@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+{% load tags %}
+{% load static %}
+<html lang="en">
+<head>
+    <title>{{ title_prefix }}{% block title_endfix %} | Kevin van der Vleuten{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'webfonts/hack.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'webfonts/koliko-Bold.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'webfonts/koliko-Light.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'webfonts/koliko-Regular.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/bootstrap-5.0.0-beta1/dist/css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'scss/custom.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'programming/css/style.css' %}">
+    <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}"/>
+</head>
+<body>
+    <header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top border-bottom border-primary bg-body">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'programming:index' %}"><span class="first-name">Kevin van der Vleuten</span><br><span class="navbar-text">Unscripted programming events</span></a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav me-auto me-2">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Portal
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <li><a class="dropdown-item" href="https://linux.matsubara.nl/" target="_blank">Linux</a></li>
+                <li><a class="dropdown-item" href="/">Programming</a></li>
+                <li><a class="dropdown-item" href="https://radio.matsubara.nl/" target="_blank">Radio</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if title_prefix == 'Project' %}active{% endif %}" aria-current="page" href="{% url 'programming:index' %}">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if title_prefix == 'Blog' %}active{% endif %}" href="\blog\1">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link {% if title_prefix == 'About' %}active{% endif %}" href="{% url 'blog:about' %}">About</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    </header>
+    <main role="main" class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container-fluid border-top border-primary bg-body">
+          <div class="row">
+            <div class="col">
+              {% quote_tag as quote %}
+              <span class="small">&nbsp;&ldquo; {{ quote.phrase }} &rdquo;&nbsp;-&nbsp;<strong>{% if quote.quotee.link %}<a href="{{ quote.quotee.link }}" target="_blank">{% endif %}{{ quote.quotee.name }}{% if quote.quotee.link %}</a>{% endif %}</strong></span>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col">
+                <span class="small">This website is powered by: <a href="https://www.python.org/" target="_blank">Python</a>, <a href="https://www.djangoproject.com/" target="_blank">Django</a>, <br><a href="https://mariadb.org/" target="_blank">MariaDB</a>, <a href="https://getbootstrap.com/" target="_blank">Bootstrap</a>, <a href="https://www.nginx.com/" target="_blank">Nginx</a> and <a href="https://ubuntu.com/" target="_blank">Ubuntu</a></span>
+            </div>
+            <div class="col">
+                <span class="small">Fonts used:
+                    <ul>
+                        <li>Kolik&ouml; by: <a href="http://fontfirma.ru/" target="_blank">Alex Frukta</a></li>
+                        <li>Hack by: <a href="https://sourcefoundry.org/hack/">source-foundry</a></li>
+                    </ul>
+                </span>
+            </div>
+          </div>
+        </div>
+    </footer>
+</body>
+<script src="{% static 'bootstrap/bootstrap-5.0.0-beta1/dist/js/bootstrap.bundle.min.js' %}"></script>
+</html>

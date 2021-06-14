@@ -1,0 +1,13 @@
+# virtualenv
+bin
+lib
+lib64
+pyvenv.cfg
+
+# project
+django-testapp
+dockerfiles
+env
+
+# any database backup files
+*.sql

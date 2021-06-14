@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title_endfix %} | Kevin van der Vleuten{% endblock %}
+
+{% block content %}
+<h1 class="text-primary"><strong>Hello</strong></h1>
+<div class="row align-items-start">
+  <div class="col">
+    <h5 class="text-primary">I'm Kevin.</h5>
+    <h5 class="text-primary">I'm a programmer.</h5>
+    <p>My first computer was a <a href="https://en.wikipedia.org/wiki/Amiga_500" target="_blank">Commodore Amiga 500</a> when I was about 10 years old, which gave me many enjoyable hours playing games on diskette like <a href="https://en.wikipedia.org/wiki/Golden_Axe_(video_game)" target="_blank">Golden Axe</a> and <a href="https://en.wikipedia.org/wiki/Shadow_of_the_Beast_(1989_video_game)" target="_blank">Shadow of the Beast</a>. Back then I was convinced the games loaded faster by tapping the buttons on the joystick really quick. It was not only my introduction to video games, but also to <a href="https://en.wikipedia.org/wiki/AmigaBASIC" target="_blank">Amiga BASIC</a> programming. Making an "A" be chased by a bunch of "C" was lots of fun.</p>
+    <p>The next computer we owned was a <a href="https://en.wikipedia.org/wiki/Medion" target="_blank">Medion</a> PC with Windows Millenium edition my father bought at the Aldi supermarket. Mostly doing homework on this device, sometimes scripting with the <a href="https://en.wikipedia.org/wiki/Warcraft_III_World_Editor" target="_blank">Warcraft III WorldEdit</a> editor.</p>
+    <p>After school was over, I worked as a conveyor-belt worker, courier, truck driver and did all kinds of jobs for an employment agency. I lived in a caravan for a while, making simple games with <a href="https://en.wikipedia.org/wiki/GameMaker" target="_blank">Game Maker</a> <i>(still using that Medion computer)</i>. I wanted to go back to school and started with Interactive Design. This lead me to building my first websites. While focus should have been on designing them, I found building them in <a href="https://www.php.net/" target="_blank">PHP</a> and <a href="https://en.wikipedia.org/wiki/HTML" target="_blank">HTML</a> so much more exciting.</p>
+    <p>This lead me to study software engineering in <a href="https://en.wikipedia.org/wiki/Breda" target="_blank">Breda</a>, where I achieved my bachelor's degree.</p>
+    <p>Now I have experience working with <a href="https://www.java.com/" target="_blank">Java</a>, <a href="https://en.wikipedia.org/wiki/C_(programming_language)" target="_blank">C</a>, <a href="https://docs.microsoft.com/en-us/dotnet/csharp/" target="_blank">C#</a> and I did a course on <a href="https://www.cplusplus.com/" target="_blank">C++</a>. I have learnt to use version control with <a href="https://git-scm.com/" target="_blank">Git</a> and I use <a href="https://ubuntu.com/" target="_blank">Ubuntu GNU/linux</a> daily on my home computer.</p>
+    <p>My favourite language to work with is <a href="https://www.python.org/" target="_blank">Python</a>, I worked on an automation project and this language and community is just great. The language has many powerful tools and features, code is always cleanly written and the workflow is just fast and enjoyable!</p>
+    <p>Currently I am learning to build software solutions using <a href="https://www.docker.com/" target="_blank">Docker</a> and <a href="https://kubernetes.io/" target="_blank">Kubernetes</a>. Containers are really a wonderful technology for any software developer, deploying and trying out different software was never faster.</p>
+    <p>I never thought I could make programming software my profession to earn my livelihood. That I was not smart enough to be a software engineer. But the best time of my life has always been involved with programming, learn from other developers and even teach aspirant developers the experience I have.</p>
+    <p>Programming has improved my life greatly and there is so much more to learn.</p>
+    <hr>
+    <h5 class="text-primary">I'm someone with many hobbies.</h5>
+    <p>Riding and maintaining a motorcycle is one of the joys in life handed down to me by my father, who was a self-taught mechanic. Its great to know how machines work and how to keep them in optimal condition.</p>
+    <p>Developing projects on the <a href="https://www.raspberrypi.org/" target="_blank">Raspberry Pi</a> and the <a href="https://www.arduino.cc/" target="_blank">Arduino</a> is something I do often.</p>
+    <p>I do occasional meditating and learn about <a href="https://en.wikipedia.org/wiki/Yoga" target="_blank">Yoga</a> and <a href="https://en.wikipedia.org/wiki/Mindfulness" target="_blank">mindfulness</a>, which keeps me fit in mind and body.</p>
+    <p>I am an introvert person and prefer to spend most of my time with a book, machine or computer.</p>
+    <p>I'm also a radio amateur, my callsign is PA4KEV and I use a Yaesu FT-897.</p>
+    <p>Thank you for reading!</p>
+  </div>
+
+  <div class="col-4">
+    <!-- Tools card -->
+    <div class="card bg-body border border-primary" style="width: 18rem;">
+      <div class="card-body">
+        <p class="card-text text-muted">{{ my_current_age }}-years-old<br>Lives in Helmond, Netherlands<br>Home OS - Ubuntu</p>
+        <hr>
+        <ul class="list-group list-group-flush bg-body">
+            <li class="list-group-item bg-body">
+            <a href="https://github.com/PA4KEV" target="_blank">
+            <div class="tool-icon" style="background-image: url('/media/icons/tools/github.png');">GitHub</div>
+            </a>
+            </li>
+            <li class="list-group-item bg-body">
+            <a href="https://www.linkedin.com/in/kevin-van-der-vleuten-b190b032/" target="_blank">
+            <div class="tool-icon" style="background-image: url('/media/icons/tools/linkedin.png');">LinkedIn</div>
+            </a>
+            </li>
+            <li class="list-group-item bg-body">
+            <a href="https://dev.to/pa4kev" target="_blank">
+            <div class="tool-icon" style="background-image: url('/media/icons/tools/dev-to.png');">dev.to</div>
+            </a>
+            </li>
+            <li class="list-group-item bg-body">
+            <a href="https://exercism.io/profiles/PA4KEV" target="_blank">
+            <div class="tool-icon" style="background-image: url('/media/icons/tools/exercism.png');">Exercism</div>
+            </a>
+            </li>
+            <li class="list-group-item bg-body">
+            <a href="https://stackoverflow.com/users/6340687/pa4kev" target="_blank">
+            <div class="tool-icon" style="background-image: url('/media/icons/tools/stack-overflow.png');">stack overflow</div>
+            </a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col">
+    <div class="card bg-body border border-primary" style="width: 14rem;">
+      <a href="/media/about/kippen-lohmann-brown.webp">
+        <img src="/media/about/kippen-lohmann-brown.webp" class="card-img-top" alt="...">
+      </a>
+      <div class="card-body">
+        <h5 class="card-title text-primary">Chickens</h5>
+        <p class="card-text">Feeding <a href="https://en.wikipedia.org/wiki/Lohmann_Brown" target="_blank">Lohmann Brown</a> chickens at my father's home.</p>
+      </div>
+    </div>
+    </div>
+
+    <div class="col">
+    <div class="card bg-body border border-primary" style="width: 14rem;">
+      <a href="/media/about/cx-500-rat-bike.webp">
+        <img src="/media/about/cx-500-rat-bike.webp" class="card-img-top" alt="...">
+      </a>
+      <div class="card-body">
+        <h5 class="card-title text-primary">Honda CX500</h5>
+        <p class="card-text">Tinkering a <a href="https://en.wikipedia.org/wiki/Honda_CX_series" target="_blank">Honda CX500</a> rat bike.</p>
+      </div>
+    </div>
+    </div>
+</div>
+
+<p></p>
+
+{% endblock %}

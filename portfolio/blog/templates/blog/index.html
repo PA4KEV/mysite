@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load tags %}
+
+{% block title_endfix %} | Kevin van der Vleuten{% endblock %}
+
+{% block content %}
+<div class="row align-items-start">
+  <div class="col">
+
+    {% for entry in entry_list %}
+      <h2 class="text-primary">{{ entry.title }}</h2>
+      <span class="date-text">{{ entry.creation_date|date:'Y-m-d' }}</span>
+      <p>{{ entry.content|preview_blog_post }}...</p>
+      <p><a href="{% url 'blog:detail' entry.id %}"><small>Read this post</small></a></p>
+      <ul>
+          {% for tag in entry.tags.all %}
+          <a href="/blog/1/?tag={{ tag.get_short_name }}" class="badge rounded-pill border border-primary">{{ tag.name }}</a>
+          {% endfor %}
+      </ul>
+      <hr>
+    {% endfor %}
+
+  </div>
+  <div class="col-4">
+    {% if current_tag %}
+    <strong>{{ current_tag }}</strong>
+    <hr>
+    {% endif %}
+    <ul>
+    {% for tag in all_tags %}
+    <li><a href="/blog/1/?tag={{ tag.get_short_name }}">{{ tag }} ({{ tag.count }})</a></li>
+    {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Pagination -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+      <li class="page-item {% if current_page == 1 %}disabled{% endif %}">
+        <a class="page-link" href="/blog/1/" aria-disabled="{% if current_page == 1 %}true{% else %}false{% endif %}">First</a>
+      </li>
+      <li class="page-item {% if current_page < 2 %}disabled{% endif %}">
+        <a class="page-link" href="/blog/{{ previous_page }}/" aria-disabled="{% if current_page < 2 %}true{% else %}false{% endif %}">Previous</a>
+      </li>
+
+      {% if current_page > 2 %}
+      <li class="page-item"><a class="page-link" href="/blog/{{ prev_previous_page }}/">{{ prev_previous_page }}</a></li>
+      {% endif %}
+      {% if not current_page == 1 %}
+      <li class="page-item"><a class="page-link" href="/blog/{{ previous_page }}/">{{ previous_page }}</a></li>
+      {% endif %}
+      <li class="page-item active"><a class="page-link" href="/blog/{{ current_page }}/">{{ current_page }}</a></li>
+      {% if not current_page == total_pages %}
+      <li class="page-item"><a class="page-link" href="/blog/{{ next_page }}/">{{ next_page }}</a></li>
+      {% endif %}
+      {% if current_page < total_pages_min_one %}
+      <li class="page-item"><a class="page-link" href="/blog/{{ next_next_page }}/">{{ next_next_page }}</a></li>
+      {% endif %}
+
+      <li class="page-item {% if current_page == total_pages %}disabled{% endif %}">
+        <a class="page-link" href="/blog/{{ next_page }}/" aria-disabled="{% if current_page == total_pages %}true{% else %}false{% endif %}">Next</a>
+      </li>
+      <li class="page-item {% if current_page == total_pages %}disabled{% endif %}">
+        <a class="page-link" href="/blog/{{ total_pages }}/" aria-disabled="{% if current_page == total_pages %}true{% else %}false{% endif %}">Last</a>
+      </li>
+    </ul>
+  </nav>
+
+</div>
+{% endblock %}

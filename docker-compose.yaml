@@ -1,0 +1,45 @@
+version: "3.8"
+services:
+
+  # mysite-mariadb:
+  #   build:
+  #     context: ./
+  #     dockerfile: ./dockerfiles/mariadb/Dockerfile
+  #   restart: always
+  #   env_file: 
+  #     - ./env/mariadb.env
+  #   # volumes: 
+  #   #   - data:/data/db    
+    
+
+  # mysite-nginx:
+  #   build:
+  #     context: ./
+  #     dockerfile: ./dockerfiles/nginx/Dockerfile
+  #   env_file: 
+  #       - ./env/nginx.env
+  #   depends_on:
+  #     - mysite-mariadb
+
+  #   # ports:
+  #   #   - '80:80'
+  #   # volumes: 
+  #   #   - logs:/app/logs
+  #   #   - ./backend:/app
+  #   #   - /app/node_modules
+    
+
+  mysite-django:
+    build:
+      context: ./
+      dockerfile: ./dockerfiles/django/Dockerfile
+    container_name: stokstaartje
+    env_file: 
+      - ./env/django.env      
+    # depends_on: 
+    #   - mysite-nginx
+    ports:
+      - "8000:8000"
+# volumes: 
+#   data:
+#   logs:

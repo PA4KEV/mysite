@@ -1,0 +1,109 @@
+// colours
+$primary: #35C2B2; // Light Sea Green
+$secondary: #DB2A71; // Dogwood Rose
+$body-bg: #0F0F26; // Xiketic
+$body-color: #D1F7FF; // Light Cyan
+$phrase-color: #B6bEBF; // Silver Sand
+$footer-color: #B6bEBF; // Silver Sand
+
+// Navbar
+$navbar-dark-brand-color:       #FFFFFF;
+$navbar-dark-brand-hover-color: #FFFFFF;
+$navbar-dark-hover-color:       $primary;
+$navbar-dark-hover-bg:          $body-bg;
+$navbar-dark-active-color:      $primary;
+
+$dropdown-bg:                   $body-bg;
+$dropdown-link-color:           $body-color;
+$dropdown-link-active-color:    $primary;
+$dropdown-link-hover-color:     $primary;
+$dropdown-link-hover-bg:        lighten($body-bg, 5%);
+
+$pagination-bg:                 $body-bg;
+$pagination-hover-color:        $primary;
+$pagination-hover-bg:           lighten($body-bg, 5%);
+$pagination-disabled-color:     lighten($primary, 25%);
+$pagination-disabled-bg:        #232323;
+
+
+// layout
+body > .container {
+    padding: 60px 15px 0;
+}
+
+// typography
+footer .small {
+    color: $footer-color;
+}
+
+footer .small {
+    color: $footer-color;
+}
+
+.navbar-brand {
+    line-height: 0.9em;
+}
+.navbar-brand > .first-name {
+    font-family: kolikoRegular;
+    font-size: 1em;
+}
+.navbar-text {
+    color: $phrase-color;
+    font-family: Hack, monospace;
+    font-size: 0.6em;
+}
+
+navbar a.active {
+    color: $secondary;
+}
+
+.date-text {
+    color: $phrase-color;
+    font-family: Hack, monospace;
+}
+
+// links
+
+a {
+    color: $secondary;
+}
+
+li > a {
+    text-decoration: none;
+}
+
+li > a:hover {
+    color: $secondary;
+    text-decoration: underline;
+}
+
+// Guru meditation error
+
+.guru-meditation {
+    font-family: Hack, monospace;
+    color: rgba(255,0,0,0.85);
+    text-align: center;
+    padding: 10px;
+
+    -webkit-animation:  GURU-MEDITATION 1s infinite; /* Safari 4+ */
+    -moz-animation:    GURU-MEDITATION 1s infinite; /* Fx 5+ */
+    -o-animation:      GURU-MEDITATION 1s infinite; /* Opera 12+ */
+    animation:         GURU-MEDITATION 1s infinite; /* IE 10+, Fx 29+ */
+}
+
+@-webkit-keyframes GURU-MEDITATION {
+0%, 14% {
+    border: 4px solid rgba(255,0,0,0.5);
+}
+15%, 69% {
+    border: 4px solid rgba(255,0,0,1.0);
+}
+70%, 84% {
+    border: 4px solid rgba(255,0,0,0.5);
+}
+85%, 100% {
+    border: 4px solid rgba(255,0,0,0);
+}
+}
+
+@import "../bootstrap/bootstrap-5.0.0-beta1/scss/bootstrap";

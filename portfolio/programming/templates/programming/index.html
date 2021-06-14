@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title_endfix %}s | Kevin van der Vleuten{% endblock %}
+
+{% block content %}
+<h1 class="text-primary">Projects</h1>
+
+<p>Here are some of the projects I have created.</p>
+<p>Some are created as projects together with others and some are personal projects.</p>
+
+<div class="row row-cols-1 row-cols-md-4 g-4">
+{% for project in projects_list %}
+    {% for card in project.projectcard_set.all %}
+      {% if card.feature_card %}
+      <div class="col">
+        <div class="card bg-body border border-primary" style="width: 14rem;">
+          <a href="{% url 'programming:detail' project.id %}">
+            <img src="/media/{{ card.image }}" class="card-img-top" alt="...">
+          </a>
+          <div class="card-body">
+            <h5 class="card-title text-primary">{{ project.name}}</h5>
+            <p class="card-text">{{ project.subtitle }}</p>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+</div>
+
+{% endblock %}

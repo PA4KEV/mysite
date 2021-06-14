@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title_endfix %}: {{ project.name }} | Kevin van der Vleuten{% endblock %}
+
+{% block content %}
+
+<div class="row align-items-start">
+  <div class="col">
+    <h1 class="text-primary">{{ project.name }}</h1>
+    <h5 class="text-secondary">{{ project.subtitle }}</h5>
+    Created on: <span class="date-text">{{ project.creation_date|date:'Y-m-d' }}</span>
+    <hr>
+    <!-- Content -->
+    <p>{{ project.description|safe }}</p>
+  </div>
+  <div class="col-4">
+    <!-- Tools card -->
+    <div class="card bg-body border border-primary" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title text-primary">Tools</h5>
+          <p class="card-text text-muted"><small>used to create this project</small></p>
+        <ul class="list-group list-group-flush bg-body">
+            {% for tool in project.tools.all %}
+            <li class="list-group-item bg-body">
+            {% if tool.link is not None %}
+            <a href="{{ tool.link }}" target="_blank">
+            {% endif %}
+            <div class="tool-icon" style="background-image: url('/media/{{ tool.icon }}');">{{ tool.name }}</div>
+            {% if tool.link is not None %}
+            </a>
+            {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Project cards -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for card in project.projectcard_set.all %}
+  <div class="col">
+    <div class="card bg-body border border-primary" style="width: 14rem;">
+      <a href="/media/{{ card.image }}">
+        <img src="/media/{{ card.image }}" onclick="openModal();currentSlide(1)" class="card-img-top" alt="...">
+      </a>
+      <div class="card-body">
+        <h5 class="card-title text-primary">{{ card.title }}</h5>
+        <p class="card-text">{{ card.description }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
