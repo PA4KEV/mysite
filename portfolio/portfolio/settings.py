@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import django.core.management.utils
 from pathlib import Path
 import os
 
@@ -21,18 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ['SECRET_KEY']
+# A random key is used for container building, see Dockerfile.
+SECRET_KEY = os.environ.get('SECRET_KEY') or django.core.management.utils.get_random_secret_key()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get('DEBUG') or False
 
-ALLOWED_HOSTS = [
-    '192.168.1.32',
-    'localhost',
-    '127.0.0.1',
-    'kevinmatsubara.com',
-    'www.kevinmatsubara.com',
-]
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', "").split() or []
 
 
 # Application definition
@@ -92,11 +88,11 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.environ['MARIADB_NAME'],
-        'USER': os.environ['MARIADB_USER'],
-        'PASSWORD': os.environ['MARIADB_PASSWORD'],
-        'HOST': os.environ['MARIADB_HOST'],
-        'PORT': os.environ['MARIADB_PORT'],
+        'NAME': os.environ.get('MARIADB_NAME', ""),
+        'USER': os.environ.get('MARIADB_USER', ""),
+        'PASSWORD': os.environ.get('MARIADB_PASSWORD', ""),
+        'HOST': os.environ.get('MARIADB_HOST', ""),
+        'PORT': os.environ.get('MARIADB_PORT', ""),
     }
 }
 
@@ -138,15 +134,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), 'media')
 
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
-
-STATIC_ROOT = '/home/kevin/static'
-
-# Media
-
-MEDIA_ROOT = '/home/kevin/media'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'

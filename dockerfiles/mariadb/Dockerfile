@@ -1,1 +1,3 @@
 FROM mariadb:10.3.25
+
+WORKDIR /

@@ -56,8 +56,10 @@
         <div class="container-fluid border-top border-primary bg-body">
           <div class="row">
             <div class="col">
+              {% if quote_tag %}
               {% quote_tag as quote %}
               <span class="small">&nbsp;&ldquo; {{ quote.phrase }} &rdquo;&nbsp;-&nbsp;<strong>{% if quote.quotee.link %}<a href="{{ quote.quotee.link }}" target="_blank">{% endif %}{{ quote.quotee.name }}{% if quote.quotee.link %}</a>{% endif %}</strong></span>
+              {% endif %}
             </div>
           </div>
           <br>

@@ -1,33 +1,23 @@
 version: "3.8"
 services:
 
-  # mysite-mariadb:
-  #   build:
-  #     context: ./
-  #     dockerfile: ./dockerfiles/mariadb/Dockerfile
-  #   restart: always
-  #   env_file: 
-  #     - ./env/mariadb.env
-  #   # volumes: 
-  #   #   - data:/data/db    
-    
 
-  # mysite-nginx:
-  #   build:
-  #     context: ./
-  #     dockerfile: ./dockerfiles/nginx/Dockerfile
-  #   env_file: 
-  #       - ./env/nginx.env
-  #   depends_on:
-  #     - mysite-mariadb
-
-  #   # ports:
-  #   #   - '80:80'
-  #   # volumes: 
-  #   #   - logs:/app/logs
-  #   #   - ./backend:/app
-  #   #   - /app/node_modules
-    
+  mysite-mariadb:
+    build:
+      context: ./
+      dockerfile: ./dockerfiles/mariadb/Dockerfile
+    container_name: ottertje
+    env_file: 
+      - ./env/mariadb.env
+    networks:
+      - db_network
+    volumes:
+      - mariadb_data:/var/lib/mariadb/data/
+    healthcheck:
+        test: ["CMD", "mysqladmin", "ping", "--silent", "-h", "localhost"]
+        timeout: 3s
+        retries: 3
+  
 
   mysite-django:
     build:
@@ -36,10 +26,43 @@ services:
     container_name: stokstaartje
     env_file: 
       - ./env/django.env      
-    # depends_on: 
-    #   - mysite-nginx
+    depends_on: 
+      mysite-mariadb:
+        condition: service_healthy
+    networks:
+      - app_network
+      - db_network
+    volumes:
+      - static:/opt/services/portfolio/static
+      - media:/opt/services/portfolio/media
+    # command: /bin/sh -c "portfolio/docker-entrypoint.sh"
+
+    
+  mysite-nginx:
+    build:
+      context: ./
+      dockerfile: ./dockerfiles/nginx/Dockerfile
+    container_name: bevertje
+    env_file: 
+      - ./env/nginx.env
+    depends_on:
+      - mysite-django
     ports:
-      - "8000:8000"
-# volumes: 
-#   data:
-#   logs:
+      - 8000:80  # Host:Container
+    networks:
+      - app_network
+    volumes:
+      - static:/opt/services/portfolio/static
+      - media:/opt/services/portfolio/media
+
+networks:
+  app_network:
+    driver: bridge
+  db_network:
+      driver: bridge
+
+volumes:
+  mariadb_data:
+    driver: local
+  static:
+  media:
