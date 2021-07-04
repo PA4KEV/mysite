@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY') or django.core.management.utils.get_ra
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG') or False
 
-ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', "").split() or []
+ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS', "").split(",") or []
 
 
 # Application definition
@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'programming.apps.ProgrammingConfig',
     'quotes.apps.QuotesConfig',
     # 'portfolio.templatetags.tags',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -131,18 +132,36 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), 'static')
+
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(BASE_DIR)), 'media')
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+# Moving static assets to DigitalOcean Spaces as per:
+# https://www.digitalocean.com/community/tutorials/how-to-set-up-object-storage-with-django
+AWS_ACCESS_KEY_ID = os.environ.get('STATIC_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('STATIC_SECRET_KEY')
+
+AWS_STORAGE_BUCKET_NAME = os.environ.get('STATIC_BUCKET_NAME')
+AWS_S3_ENDPOINT_URL = os.environ.get('STATIC_ENDPOINT_URL')
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+AWS_DEFAULT_ACL = 'public-read'
+
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+STATIC_URL = '{}/{}/'.format(AWS_S3_ENDPOINT_URL, AWS_LOCATION)
+
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+STATIC_ROOT = 'static/'
 
 # Logging Configuration
 
