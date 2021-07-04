@@ -5,6 +5,7 @@
 # project #
 django-testapp/
 *.sql
+*.yaml
 
 ### Django ###
 *.log
